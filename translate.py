@@ -6,8 +6,8 @@ from googletrans import Translator
 translator = Translator()
 
 # File paths
-input_csv = 'English/answer-answer.csv'
-output_csv = 'Translated/translated_sentences.csv'  # Output CSV file
+input_csv = 'English/images.csv'
+output_csv = 'Translated/images.csv'  # Output CSV file
 
 # Read the CSV file
 try:
@@ -16,7 +16,7 @@ try:
     # Check if required columns exist
     if 'Column1' in df.columns and 'Column2' in df.columns:
 
-        df = df.head(10)
+        df = df.head(50) # Limit the number of rows to 50 for testing purposes  <--- remove this line to translate the entire file
 
         # Translate sentences in Column1 and Column2
         sinhala_col1 = []
