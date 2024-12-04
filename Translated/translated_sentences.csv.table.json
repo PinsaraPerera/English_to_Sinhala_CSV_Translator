@@ -1,0 +1,40 @@
+{
+  "columns": [
+    {
+      "field": "Column1",
+      "title": "Column1",
+      "minWidth": 40,
+      "resizable": true,
+      "sorter": "string",
+      "headerSort": true,
+      "width": 649
+    },
+    {
+      "field": "Column2",
+      "title": "Column2",
+      "minWidth": 40,
+      "resizable": true,
+      "sorter": "string",
+      "headerSort": true,
+      "width": 622
+    },
+    {
+      "field": "Sinhala_Column1",
+      "title": "Sinhala_Column1",
+      "minWidth": 40,
+      "resizable": true,
+      "sorter": "string",
+      "headerSort": true,
+      "width": 897
+    },
+    {
+      "field": "Sinhala_Column2",
+      "title": "Sinhala_Column2",
+      "minWidth": 40,
+      "resizable": true,
+      "sorter": "string",
+      "headerSort": true,
+      "width": 982
+    }
+  ]
+}

@@ -1,35 +1,54 @@
 import pandas as pd
+import time
 from googletrans import Translator
 
 # Initialize the translator
 translator = Translator()
 
 # File paths
-input_file = 'answer-answer.test.tsv'
-output_file = 'translated_sentences.csv'
+input_csv = 'English/answer-answer.csv'
+output_csv = 'Translated/translated_sentences.csv'  # Output CSV file
 
-# Read the TSV file (preserve leading/trailing spaces)
-df = pd.read_csv(input_file, sep='\t', header=None, quoting=3, keep_default_na=False)
-df.columns = ['English']
+# Read the CSV file
+try:
+    df = pd.read_csv(input_csv)
+    
+    # Check if required columns exist
+    if 'Column1' in df.columns and 'Column2' in df.columns:
 
-# Clean up any leading/trailing spaces
-df['English'] = df['English'].str.strip()
+        df = df.head(10)
 
-# Translate each line
-translated_sentences = []
-for line in df['English']:
-    try:
-        # Translate the full line
-        translation = translator.translate(line, src='en', dest='si')
-        translated_sentences.append(translation.text)
-    except Exception as e:
-        # Append "Error" for failed translations and log the issue
-        translated_sentences.append("Error")
-        print(f"Error translating line: {line}\n{e}")
+        # Translate sentences in Column1 and Column2
+        sinhala_col1 = []
+        sinhala_col2 = []
 
+        for sentence1, sentence2 in zip(df['Column1'], df['Column2']):
+            try:
+                # Translate Column1
+                translation1 = translator.translate(sentence1, src='en', dest='si')
+                sinhala_col1.append(translation1.text)
+                time.sleep(1)  # Add a delay of 1 second
+            except Exception as e:
+                sinhala_col1.append("Error")
+                print(f"Error translating Column1: {sentence1}\n{e}")
+            
+            try:
+                # Translate Column2
+                translation2 = translator.translate(sentence2, src='en', dest='si')
+                sinhala_col2.append(translation2.text)
+                time.sleep(1)  # Add a delay of 1 second
+            except Exception as e:
+                sinhala_col2.append("Error")
+                print(f"Error translating Column2: {sentence2}\n{e}")
+        
+        # Add the translated columns to the DataFrame
+        df['Sinhala_Column1'] = sinhala_col1
+        df['Sinhala_Column2'] = sinhala_col2
 
-df['Sinhala'] = translated_sentences
-
-# Save to CSV
-df.to_csv(output_file, index=False, encoding='utf-8')
-print(f"Translation complete! Translated file saved to {output_file}")
+        # Save the updated DataFrame to a new CSV file
+        df.to_csv(output_csv, index=False, encoding='utf-8')
+        print(f"Translation complete! Translated file saved as {output_csv}")
+    else:
+        print("The required columns 'Column1' and 'Column2' do not exist in the CSV file.")
+except Exception as e:
+    print(f"Error processing the file: {e}")
