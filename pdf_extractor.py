@@ -3,8 +3,8 @@ import pandas as pd
 import re
 
 # File paths
-input_pdf = "Books/sinhalaG7.pdf"
-output_exel = "Translated/sinhala_grade_7.xlsx"
+input_pdf = "Books/sinhalaG9.pdf"
+output_exel = "Translated/sinhala_grade_9.xlsx"
 
 def extract_sentences(text):
     """
