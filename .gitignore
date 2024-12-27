@@ -5,3 +5,9 @@
 *.pdf
 *.xlsx
 *.exe
+access_key.json
+cloud-venv
+.env
+.ipynb_checkpoints
+*.ipynb
+*.sh
